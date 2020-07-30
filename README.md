@@ -1,1 +1,2 @@
-# PromotionsDynamics_Python
+# PromotionsDynamics
+Displays stock prices in real time
