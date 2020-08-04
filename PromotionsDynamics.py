@@ -4,119 +4,184 @@ import time
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
 
-Promotions_Tesla = 'https://m.ru.investing.com/equities/tesla-motors'
-Promotions_AMD = 'https://www.google.com/search?q=%D0%B0%D0%BA%D1%86%D0%B8%D0%B8+amd&oq=%D0%B0%D0%BA%D1%86%D0%B8%D0%B8+&aqs=chrome.0.69i59j69i57j0l3j69i61l3.2520j1j7&sourceid=chrome&ie=UTF-8'
+Promotions_Tesla = 'https://bcs-express.ru/kotirovki-i-grafiki/tsla'
+Promotions_AMD = 'https://bcs-express.ru/kotirovki-i-grafiki/amd'
 Promotions_Intel = 'https://ru.investing.com/equities/intel-corp'
-Promotions_Apple = 'https://ru.investing.com/equities/apple-computer-inc'
-Promotions_IBM = 'https://ru.investing.com/equities/ibm'
-Promotions_Microsoft = 'https://ru.investing.com/equities/microsoft-corp'
-Promotions_Yandex = 'https://www.finam.ru/quote/moex-akcii/pllc-yandex-n-v/'
-Promotions_Bitcoin = 'https://www.investing.com/crypto/bitcoin'
+Promotions_Apple = 'https://bcs-express.ru/kotirovki-i-grafiki/aapl'
+Promotions_IBM = 'https://bcs-express.ru/kotirovki-i-grafiki/ibm'
+Promotions_Microsoft = 'https://bcs-express.ru/kotirovki-i-grafiki/msft'
+Promotions_Yandex_Finam = 'https://www.finam.ru/quote/moex-akcii/pllc-yandex-n-v/'
+Promotions_Yandex_Investing = 'https://ru.investing.com/equities/yandex'
+Promotions_Google = 'https://ru.investing.com/equities/google-inc'
 
-inp = input('Tesla, Apple, IBM, Microsoft, Yandex, Bitcoin, Intel, AMD: ')
+Valute_Bitcoin = 'https://www.investing.com/crypto/bitcoin'
+Valute_Dollar = 'https://bcs-express.ru/kotirovki-i-grafiki/usd000utstom'
 
-if inp == 'Tesla':
+change = input('Валюты, Криптовалюты, IT-компании, Автопроизодители: ')
 
-    def check_currency_Tesla():
-        full_page = requests.get(Promotions_Tesla, headers=headers)
-        soup = BeautifulSoup(full_page.content, 'html.parser')
+if change == '1':
+    valute = input('Выберите валюту: ')
 
-        convert = soup.findAll("span", {"class": "Promotions_Tesla = 'lastInst pid-13994-last"})
-        print("Текущая стоимость акций Tesla: " + convert[0].text + " $")
-        time.sleep(4)
+    if valute == '1':
+        def check_currency_Dollar():
+            full_page = requests.get(Valute_Dollar, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
+
+            convert = soup.findAll("div", {"class": "quote-head__price-value js-quote-head-price js-price-close"})
+            print("Текущий курс Доллара: " + convert[0].text + " Rub")
+
+            convert_dyn = soup.findAll("div", {"class": "quote-head__price-change js-profit-percent"})
+            print("Изменение составило: " + convert_dyn[0].text)
+
+            dol = {'Курс сегодня: ', convert[0].text}
+            dol.to_excel('../Документы/')
+
+            check_currency_Dollar()
+        check_currency_Dollar()
+
+
+elif change == '2':
+    auto = input('(Tesla) Выберите автопроизводителя: ')
+    if auto == 'Tesla':
+        def check_currency_Tesla():
+            full_page = requests.get(Promotions_Tesla, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
+
+            convert = soup.findAll("div", {"class": "quote-head__price-value js-quote-head-price js-price-close"})
+            print("Текущая стоимость акций Tesla: " + convert[0].text + " $")
+            time.sleep(4)
+            check_currency_Tesla()
         check_currency_Tesla()
-    check_currency_Tesla()
 
-elif inp == 'AMD':
+elif change == '3':
+    IT = input('(AMD, Intel, Apple, IBM, Microsoft, Google, Yandex) Выберите IT-компанию: ')
+    if IT == '1':
+        def check_currency_AMD():
+            full_page = requests.get(Promotions_AMD, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
 
-    def check_currency_AMD():
-        full_page = requests.get(Promotions_AMD, headers=headers)
-        soup = BeautifulSoup(full_page.content, 'html.parser')
+            convert_usd = soup.findAll("div", {"class": "quote-head__price-value js-quote-head-price js-price-close"})
+            print("Текущая стоимость акций AMD: " + convert_usd[0].text + " $")
 
-        convert = soup.findAll("span", {"class": "IsqQVc NprOob XcVN5d"})
-        print("Текущая стоимость акций AMD: " + convert[0].text + " $")
-        time.sleep(4)
+            convert_dyn = soup.findAll("div", {"class": "quote-head__price-change js-profit-percent"})
+            print("Изменение составило: " + convert_dyn[0].text)
+
+            time.sleep(10)
+            check_currency_AMD()
         check_currency_AMD()
-    check_currency_AMD()
 
-elif inp == 'Intel':
+    elif IT == '2':
+        def check_currency_Intel():
+            full_page = requests.get(Promotions_Intel, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
 
-    def check_currency_Intel():
+            convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-251-last"})
+            print("Текущая стоимость акций Intel: " + convert[0].text + " $")
 
-        full_page = requests.get(Promotions_Intel, headers=headers)
-        soup = BeautifulSoup(full_page.content, 'html.parser' + " $")
-
-        convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-251-last"})
-        print("Текущая стоимость акций Intel: " + convert[0].text + " $")
-        time.sleep(4)
+            time.sleep(4)
+            check_currency_Intel()
         check_currency_Intel()
-    check_currency_Intel()
 
-elif inp == 'Apple':
+    elif IT == '3':
+        def check_currency_Apple():
 
-    def check_currency_Apple():
+            full_page = requests.get(Promotions_Apple, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
 
-        full_page = requests.get(Promotions_Apple, headers=headers)
-        soup = BeautifulSoup(full_page.content, 'html.parser')
-
-        convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-6408-last"})
-        print("Текущая стоимость акций Apple: " + convert[0].text + " $")
-        time.sleep(4)
+            convert = soup.findAll("div", {"class": "quote-head__price-value js-quote-head-price js-price-close"})
+            print("Текущая стоимость акций Apple: " + convert[0].text + " $")
+            time.sleep(5)
+            check_currency_Apple()
         check_currency_Apple()
-    check_currency_Apple()
 
-elif inp == 'IBM':
+    elif IT == '4':
+        def check_currency_IBM():
 
-    def check_currency_IBM():
+            full_page = requests.get(Promotions_IBM, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
 
-        full_page = requests.get(Promotions_IBM, headers=headers)
-        soup = BeautifulSoup(full_page.content, 'html.parser')
+            convert_usd = soup.findAll("div", {"class": "quote-head__price-value js-quote-head-price js-price-close"})
+            print("Текущая стоимость акций IBM: " + convert_usd[0].text + " $")
 
-        convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-8082-last"})
-        print("Текущая стоимость акций IBM: " + convert[0].text + " $")
-        time.sleep(4)
+            convert_dyn = soup.findAll("div", {"class": "quote-head__price-change js-profit-percent"})
+            print("Изменение составило: " + convert_dyn[0].text)
+
+            time.sleep(10)
+            check_currency_IBM()
         check_currency_IBM()
-    check_currency_IBM()
 
-elif inp == 'Microsoft':
+    elif IT == '5':
+        def check_currency_Microsoft():
+            full_page = requests.get(Promotions_Microsoft, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
 
-    def check_currency_Microsoft():
+            convert = soup.findAll("div", {"class": "quote-head__price-value js-quote-head-price js-price-close"})
+            print("Текущая стоимость акций Microsoft: " + convert[0].text + " $")
 
-        full_page = requests.get(Promotions_Microsoft, headers=headers)
-        soup = BeautifulSoup(full_page.content, 'html.parser')
+            convert_dyn = soup.findAll("div", {"class": "quote-head__price-change js-profit-percent"})
+            print("Изменение составило: " + convert_dyn[0].text)
 
-        convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-252-last"})
-        print("Текущая стоимость акций Microsoft: " + convert[0].text + " $")
-        time.sleep(4)
+            time.sleep(10)
+            check_currency_Microsoft()
         check_currency_Microsoft()
-    check_currency_Microsoft()
 
-elif inp == 'Yandex':
+    elif IT == '6':
+        def check_currency_Google():
 
-    def check_currency_Yandex():
+            full_page = requests.get(Promotions_Google, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
 
-        full_page = requests.get(Promotions_Yandex, headers=headers)
-        soup = BeautifulSoup(full_page.content, 'html.parser')
+            convert_usd = soup.findAll("span", {"class": "arial_26 inlineblock pid-6369-last"})
+            print("Текущая стоимость акций Google: " + convert_usd[0].text + " $")
 
-        convert = soup.findAll("span", {"class": "PriceInformation__price--26G"})
-        print("Текущая стоимость акций Яндекс: " + convert[0].text)
-        time.sleep(5)
-        check_currency_Yandex()
-    check_currency_Yandex()
+            time.sleep(5)
+            check_currency_Google()
+        check_currency_Google()
 
-elif inp == 'Bitcoin':
+    elif IT == '7':
+        yan = input('Источник: ')
+        if yan == '1':
+            def check_currency_Yandex_Finam():
 
-    def check_currency_Bitcoin():
+                full_page = requests.get(Promotions_Yandex_Finam, headers=headers)
+                soup = BeautifulSoup(full_page.content, 'html.parser')
 
-        full_page = requests.get(Promotions_Bitcoin, headers=headers)
-        soup = BeautifulSoup(full_page.content, 'html.parser')
+                convert = soup.findAll("span", {"class": "PriceInformation__price--26G"})
+                print("Текущая стоимость акций Яндекс: " + convert[0].text)
+                time.sleep(5)
+                check_currency_Yandex_Finam()
+            check_currency_Yandex_Finam()
 
-        convert = soup.findAll("span", {"class": "pid-1057391-last"})
-        print("Текущая стоимость Bitcoin: " + convert[0].text + " $")
-        time.sleep(4)
+        elif yan == '2':
+            def check_currency_Yandex_Investing():
+
+                full_page = requests.get(Promotions_Yandex_Investing, headers=headers)
+                soup = BeautifulSoup(full_page.content, 'html.parser')
+
+                convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-13999-last"})
+                print("Текущая стоимость акций Яндекс: " + convert[0].text)
+
+                convert_dyn = soup.findAll("span", {"class": "arial_20  pid-13999-pcp parentheses redFont"})
+                print("Изменение составило: " + convert_dyn[0])
+
+                time.sleep(5)
+                check_currency_Yandex_Investing()
+            check_currency_Yandex_Investing()
+
+elif change =='4':
+    crypto = input('Выберите крипту: ')
+    if crypto == 'Bitcoin':
+        def check_currency_Bitcoin():
+
+            full_page = requests.get(Valute_Bitcoin, headers=headers)
+            soup = BeautifulSoup(full_page.content, 'html.parser')
+
+            convert = soup.findAll("span", {"class": "pid-1057391-last"})
+            print("Текущая стоимость Bitcoin: " + convert[0].text + " $")
+            time.sleep(4)
+            check_currency_Bitcoin()
         check_currency_Bitcoin()
-    check_currency_Bitcoin()
 
 else:
-    print('Такой компании тут нет, буржуй')
+    print('Такого направления тут нет, буржуй')
     nachen = input('Press any key: ')
