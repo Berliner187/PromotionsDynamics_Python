@@ -1,10 +1,13 @@
+#!/usr/bin/env python3
 import requests
 from bs4 import BeautifulSoup
 import time
 
 headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'}
+headers_Win = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
 
-Promotions_Tesla = 'https://bcs-express.ru/kotirovki-i-grafiki/tsla'
+Promotions_Tesla = 'https://ru.investing.com/equities/tesla-motors'
+Promotions_Nissan = 'https://ru.investing.com/equities/nissan-motor-co.,-ltd.'
 Promotions_AMD_reserve = 'https://bcs-express.ru/kotirovki-i-grafiki/amd'
 Promotions_AMD = 'https://www.investing.com/equities/adv-micro-device'
 Promotions_Intel = 'https://ru.investing.com/equities/intel-corp'
@@ -14,48 +17,95 @@ Promotions_Microsoft = 'https://www.investing.com/equities/microsoft-corp'
 Promotions_Yandex = 'https://www.investing.com/equities/yandex'
 Promotions_Google = 'https://ru.investing.com/equities/google-inc'
 Promotions_Facebook = 'https://www.investing.com/equities/facebook-inc'
+Promotions_GM = 'https://ru.investing.com/equities/gen-motors'
 
 Valute_Bitcoin = 'https://www.investing.com/crypto/bitcoin'
-Valute_Dollar = 'https://bcs-express.ru/kotirovki-i-grafiki/usd000utstom'
+Valute_Dollar_reserve = 'https://bcs-express.ru/kotirovki-i-grafiki/usd000utstom'
+Valute_Dollar = 'https://ru.investing.com/currencies/usd-rub'
 Valute_Euro = 'https://ru.investing.com/currencies/eur-rub'
 
-update_text = '********************************* Обновление данных *********************************'
+update_text = '------------------------------- Update Data... -------------------------------'
 
 def check_Vatute():
     print()
-    print('******* Доллар *******')
+    print('******* Dollar *******')
     full_page = requests.get(Valute_Dollar, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("div", {"class": "quote-head__price-value js-quote-head-price js-price-close"})
-    print("Текущий курс Доллара: " + convert[0].text + " ₽")
-    convert_dyn = soup.findAll("div", {"class": "quote-head__price-change js-profit-percent"})
-    print("Изменение составило: " + convert_dyn[0].text)
+    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-2186-last"})
+    print("Текущий курс Доллара: " + convert[0].text + " ₽ за 1$")
+    convert_min = soup.findAll("span", {"class": "inlineblock pid-2186-low"})
+    convert_max = soup.findAll("span", {"class": "inlineblock pid-2186-high"})
+    print("Дневной минимум: " + convert_min[0].text + " ₽")
+    print("Дневной максимум: " + convert_max[0].text + " ₽")
+    print()
     time.sleep(2)
 
-    print('******* Евро *******')
+    print('******* Euro *******')
     full_page = requests.get(Valute_Euro, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-1691-last"})
-    print("Текущий курс Евро: " + convert[0].text + " ₽")
+    print("Текущий курс Евро: " + convert[0].text + " ₽ за 1€")
+    convert_min = soup.findAll("span", {"class": "inlineblock pid-1691-low"})
+    convert_max = soup.findAll("span", {"class": "inlineblock pid-1691-high"})
+    print("Дневной минимум: " + convert_min[0].text + " ₽")
+    print("Дневной максимум: " + convert_max[0].text + " ₽")
     print(update_text)
     time.sleep(2)
     check_Vatute()
+    print()
 
 def check_Crypto():
-
+    print()
+    print('******* Bitcoin *******')
     full_page = requests.get(Valute_Bitcoin, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert = soup.findAll("span", {"class": "pid-1057391-last"})
     print("Текущая стоимость Bitcoin: " + convert[0].text + " $")
-    time.sleep(2)
+    convert_min = soup.findAll("span", {"class": ""})
+    convert_max = soup.findAll("span", {"class": ""})
+    print("Дневной минимум: " + convert_min[0].text + " $")
+    print("Дневной максимум: " + convert_max[0].text + " $")
+    print()
     print(update_text)
+    time.sleep(2)
     check_Crypto()
 
 def check_Auto():
+    print()
+    print('******* Tesla *******')
     full_page = requests.get(Promotions_Tesla, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("div", {"class": "quote-head__price-value js-quote-head-price js-price-close"})
+    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-13994-last"})
     print("Текущая стоимость акций Tesla: " + convert[0].text + " $")
+    convert_min = soup.findAll("span", {"class": "inlineblock pid-13994-low"})
+    convert_max = soup.findAll("span", {"class": "inlineblock pid-13994-high"})
+    print("Дневной минимум: " + convert_min[0].text + " $")
+    print("Дневной максимум: " + convert_max[0].text + " $")
+    time.sleep(2)
+    print()
+
+    print('******* Nissan *******')
+    full_page = requests.get(Promotions_Nissan, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    convert_usd = soup.findAll("span", {"class": "arial_26 inlineblock pid-44127-last"})
+    print("Текущая стоимость акций Nissan: " + convert_usd[0].text + " $")
+    convert_min = soup.findAll("span", {"class": "inlineblock pid-44127-low"})
+    convert_max = soup.findAll("span", {"class": "inlineblock pid-44127-high"})
+    print("Дневной минимум: " + convert_min[0].text + " $")
+    print("Дневной максимум: " + convert_max[0].text + " $")
+    print()
+    time.sleep(2)
+
+    print('******* General Motors *******')
+    full_page = requests.get(Promotions_GM, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    convert_usd = soup.findAll("span", {"class": "arial_26 inlineblock pid-239-last"})
+    print("Текущая стоимость акций General Motors: " + convert_usd[0].text + " $")
+    convert_min = soup.findAll("span", {"class": "inlineblock pid-239-low"})
+    convert_max = soup.findAll("span", {"class": "inlineblock pid-239-high"})
+    print("Дневной минимум: " + convert_min[0].text + " $")
+    print("Дневной максимум: " + convert_max[0].text + " $")
+    print()
     print(update_text)
     time.sleep(2)
     check_Auto()
@@ -155,13 +205,13 @@ def check_IT():
     convert_max = soup.findAll("span", {"class": "inlineblock pid-13999-high"})
     print("Дневной минимум: " + convert_min[0].text + " $")
     print("Дневной максимум: " + convert_max[0].text + " $")
-    print(update_text)
-    time.sleep(2)
+
     print()
+    print(update_text)
     check_IT()
 
-print('Выберите направление цифрой: ')
-change_Prom = input('1 - Валюты, 2 - Криптовалюты, 3 - Автопроизодители, 4 - IT-корпорации: ')
+print('Change direction numeral: ')
+change_Prom = input('1 - Currency, 2 - Cryptocurrencies, 3 - Car manufacturers, 4 - IT-corporations: ')
 
 if change_Prom == '1':
     check_Vatute()
@@ -172,4 +222,4 @@ elif change_Prom == '3':
 elif change_Prom == '4':
     check_IT()
 else:
-    print('Такого направления нет, повторите ввод перезапуском программы')
+    print('Error #355, please try again on restart ')
