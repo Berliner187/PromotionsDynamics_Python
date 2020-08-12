@@ -18,6 +18,8 @@ Promotions_Yandex = 'https://www.investing.com/equities/yandex'
 Promotions_Google = 'https://ru.investing.com/equities/google-inc'
 Promotions_Facebook = 'https://www.investing.com/equities/facebook-inc'
 Promotions_GM = 'https://ru.investing.com/equities/gen-motors'
+Promotions_Ford = 'https://ru.investing.com/equities/ford-motor-co'
+Promotions_Daimler = 'https://ru.investing.com/equities/daimler'
 
 Valute_Bitcoin = 'https://www.investing.com/crypto/bitcoin'
 Valute_Dollar_reserve = 'https://bcs-express.ru/kotirovki-i-grafiki/usd000utstom'
@@ -110,9 +112,33 @@ def check_Auto():
     print(day_min + convert_min[0].text + " $")
     print(day_max + convert_max[0].text + " $")
     print()
-    print(update_text)
     time.sleep(2)
-    check_Auto()
+
+    print('******* Ford *******')
+    full_page = requests.get(Promotions_Ford, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    convert_usd = soup.findAll("span", {"class": "arial_26 inlineblock pid-255-last"})
+    convert_min = soup.findAll("span", {"class": "inlineblock pid-255-low"})
+    convert_max = soup.findAll("span", {"class": "inlineblock pid-255-high"})
+    print(promotions_now + " Ford: " + convert_usd[0].text + " $")
+    print(day_min + convert_min[0].text + " $")
+    print(day_max + convert_max[0].text + " $")
+    print()
+    time.sleep(2)
+
+    print('******* Daimler AG *******')
+    full_page = requests.get(Promotions_Daimler, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    convert_usd = soup.findAll("span", {"class": "arial_26 inlineblock pid-355-last"})
+    convert_min = soup.findAll("span", {"class": "inlineblock pid-355-low"})
+    convert_max = soup.findAll("span", {"class": "inlineblock pid-355-high"})
+    print(promotions_now + " Ford: " + convert_usd[0].text + " $")
+    print(day_min + convert_min[0].text + " $")
+    print(day_max + convert_max[0].text + " $")
+    print()
+    time.sleep(2)
+    print(update_text)
+    check_Auto()    
 
 def check_IT():
     print()

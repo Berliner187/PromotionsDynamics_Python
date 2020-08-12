@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import requests
 from bs4 import BeautifulSoup
 import time
@@ -10,7 +11,6 @@ headers_Win = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb
 
 Promotions_Tesla = 'https://ru.investing.com/equities/tesla-motors'
 Promotions_Nissan = 'https://ru.investing.com/equities/nissan-motor-co.,-ltd.'
-Promotions_AMD_reserve = 'https://bcs-express.ru/kotirovki-i-grafiki/amd'
 Promotions_AMD = 'https://ru.investing.com/equities/adv-micro-device'
 Promotions_Intel = 'https://ru.investing.com/equities/intel-corp'
 Promotions_Apple = 'https://ru.investing.com/equities/apple-computer-inc'
@@ -20,9 +20,10 @@ Promotions_Yandex = 'https://ru.investing.com/equities/yandex'
 Promotions_Google = 'https://ru.investing.com/equities/google-inc'
 Promotions_Facebook = 'https://ru.investing.com/equities/facebook-inc'
 Promotions_GM = 'https://ru.investing.com/equities/gen-motors'
+Promotions_Ford = 'https://ru.investing.com/equities/ford-motor-co'
+Promotions_Daimler = 'https://ru.investing.com/equities/daimler'
 
 Valute_Bitcoin = 'https://ru.investing.com/crypto/bitcoin/btc-usd'
-Valute_Dollar_reserve = 'https://bcs-express.ru/kotirovki-i-grafiki/usd000utstom'
 Valute_Dollar = 'https://ru.investing.com/currencies/usd-rub'
 Valute_Euro = 'https://ru.investing.com/currencies/eur-rub'
 
@@ -30,6 +31,7 @@ start_collection = 'Data collection in progress, please wait'
 progress_bar = 'Progress: '
 packing = 'Packing into file...'
 sheet_name = 'Данные рынка на '
+
 prom_now = "Текущая стоимость акций "
 prom_day_max = 'Дневной максимум '
 prom_day_min = 'Дневной минимум '
@@ -38,9 +40,10 @@ valut_now = 'Текущий курс '
 valut_day_max = 'Дневной максимум '
 valut_day_min = 'Дневной минимум '
 
+start_program = 'Program will started'
+
 def check_Vatute():
-    print()
-    print(start_collection)
+    print('\n', start_program, '\n\n', start_collection, '\n')
     full_page = requests.get(Valute_Dollar, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert_usd = soup.findAll("span", {"class": "arial_26 inlineblock pid-2186-last"})
@@ -56,6 +59,7 @@ def check_Vatute():
     convert_max_eu = soup.findAll("span", {"class": "inlineblock pid-1691-high"})
     print(progress_bar + '2/2')
     print()
+    time.sleep(.5)
 
     time_flow = input('Текущее время (hh-mm): ')
     print(packing)
@@ -71,9 +75,10 @@ def check_Vatute():
 
     today = date.today()
     time_now = datetime.datetime.time(datetime.datetime.now())
-    direction = 'Currency '
+    directory = 'Currency/'
+    direction = 'Currency_'
     new_data = pd.DataFrame(data).rename_axis(None, axis=1)
-    file_name = str(direction) + str(today) + '-' + str(time_flow)
+    file_name = str(directory) + str(direction) + str(today) + '-' + str(time_flow)
     file_directory = file_name + '.xlsx'
     new_data.style.hide_index()
     writer = pd.ExcelWriter(file_directory, engine='xlsxwriter')
@@ -93,14 +98,12 @@ def check_Vatute():
     worksheet.set_column('B:B', 10, num_format)
 
     writer.save()
-    print('Файл с названием ' + file_name + ' сохранен')
+    print('Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
     end = input('Press Enter: ')
 
 
 def check_Crypto():
-    print()
-    print(start_collection)
-    print()
+    print('\n', start_program, '\n\n', start_collection, '\n')
     full_page = requests.get(Valute_Bitcoin, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert_bitcoin = soup.findAll("span", {"class": "arial_26 inlineblock pid-945629-last"})
@@ -108,6 +111,7 @@ def check_Crypto():
     convert_max_bitcoin = soup.findAll("span", {"class": "inlineblock pid-945629-high"})
     print(progress_bar + '1/1')
     print()
+    time.sleep(.5)
 
     time_flow = input('Текущее время (hh-mm): ')
     print(packing)
@@ -119,9 +123,10 @@ def check_Crypto():
 
     today = date.today()
     time_now = datetime.datetime.time(datetime.datetime.now())
+    directory = 'Cryptocurrencies/'
     direction = 'Crypto '
     new_data = pd.DataFrame(data).rename_axis(None, axis=1)
-    file_name = str(direction) + str(today) + '-' + str(time_flow)
+    file_name = str(directory) + str(direction) + str(today) + '-' + str(time_flow)
     file_directory = file_name + '.xlsx'
     new_data.style.hide_index()
     writer = pd.ExcelWriter(file_directory, engine='xlsxwriter')
@@ -140,17 +145,14 @@ def check_Crypto():
     worksheet.set_column('B:B', 30, format)
 
     writer.save()
-    print('Файл с названием ' + file_name + ' сохранен')
+    print('Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
     end = input('Press Enter: ')
 
 
-
 def check_Auto():
-    print()
-    print(start_collection)
-    print()
+    print('\n', start_program, '\n\n', start_collection, '\n')
     time.sleep(.6)
-    print(progress_bar + '1/3')
+    print(progress_bar + '1/5')
     full_page = requests.get(Promotions_Tesla, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert_tesla = soup.findAll("span", {"class": "arial_26 inlineblock pid-13994-last"})
@@ -158,7 +160,7 @@ def check_Auto():
     convert_max_tesla = soup.findAll("span", {"class": "inlineblock pid-13994-high"})
     time.sleep(2)
 
-    print(progress_bar + '2/3')
+    print(progress_bar + '2/5')
     full_page = requests.get(Promotions_Nissan, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert_nissan = soup.findAll("span", {"class": "arial_26 inlineblock pid-44127-last"})
@@ -166,15 +168,32 @@ def check_Auto():
     convert_max_nissan = soup.findAll("span", {"class": "inlineblock pid-44127-high"})
     time.sleep(2)
 
-    print(progress_bar + '3/3')
+    print(progress_bar + '3/5')
     full_page = requests.get(Promotions_GM, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert_gm = soup.findAll("span", {"class": "arial_26 inlineblock pid-239-last"})
     convert_min_gm = soup.findAll("span", {"class": "inlineblock pid-239-low"})
     convert_max_gm = soup.findAll("span", {"class": "inlineblock pid-239-high"})
+    time.sleep(.5)
+
+    print(progress_bar + '4/5')
+    full_page = requests.get(Promotions_Ford, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    convert_ford = soup.findAll("span", {"class": "arial_26 inlineblock pid-255-last"})
+    convert_min_ford = soup.findAll("span", {"class": "inlineblock pid-255-low"})
+    convert_max_ford = soup.findAll("span", {"class": "inlineblock pid-255-high"})
+    time.sleep(2)
+
+    print(progress_bar + '5/5')
+    full_page = requests.get(Promotions_Daimler, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    convert_daimler = soup.findAll("span", {"class": "arial_26 inlineblock pid-355-last"})
+    convert_min_daimler = soup.findAll("span", {"class": "inlineblock pid-355-low"})
+    convert_max_daimler = soup.findAll("span", {"class": "inlineblock pid-355-high"})
+    time.sleep(2)
 
     time_flow = input('Текущее время (hh-mm): ')
-    print('Данные собраны, идет упаковка в файл...')
+    print(packing)
     prom_now = "Текущая стоимость акций "
     prom_day_max = 'Дневной максимум '
     prom_day_min = 'Дневной минимум '
@@ -187,17 +206,25 @@ def check_Auto():
         [prom_day_min, convert_min_nissan[0].text],
         [prom_day_max, convert_max_nissan[0].text],
         [" ", " "],
-        [prom_now + str("Genetal Motors"), convert_gm[0].text],
+        [prom_now + str("General Motors"), convert_gm[0].text],
         [prom_day_min, convert_min_gm[0].text],
         [prom_day_max, convert_max_gm[0].text],
         [" ", " "],
+        [prom_now + str("Ford"), convert_ford[0].text],
+        [prom_day_min, convert_min_ford[0].text],
+        [prom_day_max, convert_max_ford[0].text],
+        [" ", " "],
+        [prom_now + str("Daimler"), convert_daimler[0].text],
+        [prom_day_min, convert_min_daimler[0].text],
+        [prom_day_max, convert_max_daimler[0].text],
     ]
 
     today = date.today()
-    time_now = datetime.datetime.time(datetime.datetime.now())
+    directory = 'Carmakers/'
     direction = 'Сarmakers_'
+    time_now = datetime.datetime.time(datetime.datetime.now())
     new_data = pd.DataFrame(data).rename_axis(None, axis=1)
-    file_name = str(direction) + str(today) + '-' + str(time_flow)
+    file_name = str(directory) + str(direction) + str(today) + '-' + str(time_flow)
     file_directory = file_name + '.xlsx'
     new_data.style.hide_index()
     writer = pd.ExcelWriter(file_directory, engine='xlsxwriter')
@@ -216,14 +243,12 @@ def check_Auto():
     worksheet.set_column('B:B', 20, format)
 
     writer.save()
-    print('Файл с названием ' + file_name + ' сохранен')
+    print('Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
     end = input('Press Enter: ')
 
-def check_IT():
 
-    print()
-    print(start_collection)
-    print()
+def check_IT():
+    print('\n', start_program, '\n\n', start_collection, '\n')
     full_page = requests.get(Promotions_AMD, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert_amd = soup.findAll("span", {"class": "arial_26 inlineblock pid-8274-last"})
@@ -286,6 +311,7 @@ def check_IT():
     convert_min_yandex = soup.findAll("span", {"class": "inlineblock pid-13999-low"})
     convert_max_yandex = soup.findAll("span", {"class": "inlineblock pid-13999-high"})
     print(progress_bar + '8/8')
+    time.sleep(.5)
 
     time_flow = input('Текущее время (hh-mm): ')
     print(packing)
@@ -325,9 +351,10 @@ def check_IT():
 
     today = date.today()
     time_now = datetime.datetime.time(datetime.datetime.now())
-    direction = 'IT '
+    directory = 'IT-corporations/'
+    direction = 'IT_'
     new_data = pd.DataFrame(data).rename_axis(None, axis=1)
-    file_name = str(direction) + str(today) + '-' + str(time_flow)
+    file_name = str(directory) + str(direction) + str(today) + '-' + str(time_flow)
     file_directory = file_name + '.xlsx'
     new_data.style.hide_index()
     writer = pd.ExcelWriter(file_directory, engine='xlsxwriter')
@@ -342,11 +369,11 @@ def check_IT():
     format = workbook.add_format({'align': 'left'})
 
     worksheet.set_landscape()
-    worksheet.set_column('A:A', 60, format)
-    worksheet.set_column('B:B', 30, format)
+    worksheet.set_column('A:A', 40, format)
+    worksheet.set_column('B:B', 20, format)
 
     writer.save()
-    print('Файл с названием ' + file_name + ' сохранен')
+    print('Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
     end = input('Press Enter: ')
 
 
