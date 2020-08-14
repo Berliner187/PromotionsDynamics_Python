@@ -88,8 +88,9 @@ def check_Vatute():
     worksheet = writer.sheets[str(sheet_name) + str(today)]
 
     format_list = workbook.add_format({'border': 0, 'num_format': 'hh:mm:ss', 'size': 14, 'align': 'center'})
+    format_date = workbook.add_format({'align': 'center'})
     worksheet.write('A1', time_now, format_list)
-    worksheet.write('B1', '', format_list)
+    worksheet.write('B1', today, format_date)
     format = workbook.add_format({'align': 'left'})
     num_format = workbook.add_format({'num_format': '0'})
 
@@ -99,7 +100,7 @@ def check_Vatute():
 
     writer.save()
     print('Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
-    end = input('Press Enter: ')
+    time.sleep(3)
 
 
 def check_Crypto():
@@ -136,8 +137,9 @@ def check_Crypto():
     worksheet = writer.sheets[str(sheet_name) + str(today)]
 
     format_list = workbook.add_format({'border': 0, 'num_format': 'hh:mm:ss', 'size': 14, 'align': 'center'})
+    format_date = workbook.add_format({'align': 'center'})
     worksheet.write('A1', time_now, format_list)
-    worksheet.write('B1', '', format_list)
+    worksheet.write('B1', today, format_date)
     format = workbook.add_format({'align': 'left'})
 
     worksheet.set_landscape()
@@ -146,7 +148,7 @@ def check_Crypto():
 
     writer.save()
     print('Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
-    end = input('Press Enter: ')
+    time.sleep(3)
 
 
 def check_Auto():
@@ -234,8 +236,9 @@ def check_Auto():
     worksheet = writer.sheets[str(sheet_name) + str(today)]
 
     format_list = workbook.add_format({'border': 0, 'num_format': 'hh:mm:ss', 'size': 14, 'align': 'center'})
+    format_date = workbook.add_format({'align': 'center'})
     worksheet.write('A1', time_now, format_list)
-    worksheet.write('B1', '', format_list)
+    worksheet.write('B1', today, format_date)
     format = workbook.add_format({'align': 'left'})
 
     worksheet.set_landscape()
@@ -244,7 +247,7 @@ def check_Auto():
 
     writer.save()
     print('Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
-    end = input('Press Enter: ')
+    time.sleep(3)
 
 
 def check_IT():
@@ -364,8 +367,9 @@ def check_IT():
     worksheet = writer.sheets[str(sheet_name) + str(today)]
 
     format_list = workbook.add_format({'border': 0, 'num_format': 'hh:mm:ss', 'size': 14, 'align': 'center'})
+    format_date = workbook.add_format({'align': 'center'})
     worksheet.write('A1', time_now, format_list)
-    worksheet.write('B1', '', format_list)
+    worksheet.write('B1', today, format_date)
     format = workbook.add_format({'align': 'left'})
 
     worksheet.set_landscape()
@@ -374,7 +378,7 @@ def check_IT():
 
     writer.save()
     print('Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
-    end = input('Press Enter: ')
+    time.sleep(3)
 
 
 print('Change direction numeral: ')
