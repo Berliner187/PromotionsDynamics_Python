@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Promotions Dynamics</title>
+	<link rel="icon" type="img/svg" href="favicon.svg">
+	<script type="text/javascript" src="/eel.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/PromDyn.css">
+</head>
+<body>
+	
+	<div class="block-header brd">
+		<h1>Promotions Dynamics</h1>
+	</div>
+
+	<div class="block-left brd" align="center">
+		
+		<div class="inline-info">
+        	<p>Current value of shares: <span class="span-out" id="prom_info"> --- </span> $</p>
+        	<hr>
+
+        	<p class="p-font-1">Calculate dividends</p>
+        	<div class="confilm-entry" align="center">
+        		<input id="a_0" class="entry-field ef-small" type="text" placeholder="The cost">
+        		<input id="a_1" class="entry-field ef-small" type="text" name="" placeholder="Shares in the estate">
+        		<input id="a_2" class="entry-field ef-small" type="text" placeholder="Percent">
+        	</div>
+        		<button id="get_Dividends" class="btn-confilm">Calculate</button>
+        	<p>Profit for the quarter: <span class="span-out" id="totalDividends"> --- </span></p>
+        	<hr>
+
+        	<p class="p-font-1">Calculate profit</p>
+				<div class="confilm-entry">
+        			<input id="userNum" class="entry-field ef-small" type="number" placeholder="Purchase price">
+        			<input id="userQuantity" class="entry-field ef-small" type="number" placeholder="Amount">
+        			<button id="get_CalcProfit" class="btn-confilm">Calculate</button>
+        		<p>Total profit:  <span class="span-out" id="totalProfit"> --- </span></p>
+        	</div>
+
+    	</div>
+
+    </div>
+
+    <div class="block-right brd" align="center">
+		
+	<p>IT-corporations</p>
+        <button id="get_AMD" class="buttons btn-out">AMD</button>
+        <button id="get_Intel" class="buttons btn-out">Intel</button>
+        <button id="get_Apple" class="buttons btn-out">Apple</button>
+        <button id="get_Facebook" class="buttons btn-out">Facebook</button>
+        <button id="get_Google" class="buttons btn-out">Google</button>
+        <button id="get_IBM" class="buttons btn-out">IBM</button>
+        <button id="get_Microsoft" class="buttons btn-out">Microsoft</button>
+        <button id="get_EA" class="buttons btn-out">Electronic Arts</button>
+        <button id="get_Yandex" class="buttons btn-out">Yandex</button>
+        <button id="get_Huawei" class="buttons btn-out">Huawei</button>
+
+    <p>Car manufacturers</p>
+    	<button id="get_Tesla" class="buttons btn-out">Tesla</button>
+        <button id="get_Nissan" class="buttons btn-out">Nissan</button>
+        <button id="get_Ford" class="buttons btn-out">Ford</button>
+
+    </div>
+
+	<script type="text/javascript" src="js/PromDyn.js"></script>
+
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
+	<figure class="highcharts-figure">
+	  <div id="container"></div>
+	</figure>
+
+	<script type="text/javascript">
+	    let ap_1 = 467.43
+		let ap_2 = 462.25
+		let ap_3 = 460
+		let ap_4 = 450.91
+		let ap_5 = 467.61
+		let ap_6 = 462.25
+		let ap_7 = 460.04
+		let ap_8 = 452.04
+		let ap_9 = 450.91
+		let ap_10 = 455.61
+		let ap_11 = 440.25
+		let ap_12 = 438.66
+		let ap_13 = 435.75
+		let ap_14 = 425.04
+
+		Highcharts.chart('container', {
+		  chart: {
+		    type: 'line'
+		  },
+		  title: {
+		    text: 'Promotions Dynamics'
+		  },
+		  subtitle: {
+		    text: 'Source: Investing.com'
+		  },
+		  xAxis: {
+		    categories: ['8 Aug', '9 Aug', '10 Aug', '11 Aug', '12 Aug', '14 Aug', '13 Aug', '14 Aug', '15 Aug', '16 Aug', '17 Aug', '17 Aug', '18 Aug', '19 Aug']
+		  },
+		  yAxis: {
+		    title: {
+		      text: 'Share price'
+		    }
+		  },
+		  plotOptions: {
+		    line: {
+		      dataLabels: {
+		        enabled: true
+		      },
+		      enableMouseTracking: true
+		    }
+		  },
+		  series: [{
+		    name: 'Apple',
+		    data: [ap_14, ap_13, ap_12, ap_11, ap_10, ap_9, ap_8, ap_7, ap_6, ap_5, ap_4, ap_3, ap_2, ap_1]
+		  },
+		    {
+		    name: 'IBM',
+		    data: [52, 25, 45]
+		  }]
+		});
+	</script>
+
+</body>
+</html>
