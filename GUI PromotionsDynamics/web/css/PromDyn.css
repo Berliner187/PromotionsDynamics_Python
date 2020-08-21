@@ -26,7 +26,8 @@ h2 {
 }
 p {
 	font-size: 1.5em;
-	color: #fff
+	color: #fff;
+	text-shadow: .2em .2em .4em black
 }
 .p-font-1 {
 	font-size: 2em
@@ -60,7 +61,7 @@ hr {
     padding: 5px;
     border-radius: 2em;
     box-shadow: 1em 1em 1em .7em;
-    background-color: #d3afaa;
+    background-color: #dab6c8;
 }
 .block-left {
 	width: 30%;
@@ -127,7 +128,7 @@ hr {
 	cursor: pointer;
 }
 .btn-out {
-	background-color: #331e18;
+	background-color: #691d35;
 }
 .buttons:hover {
 	transition-duration: .3s;
