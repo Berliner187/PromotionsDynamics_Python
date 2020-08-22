@@ -20,6 +20,8 @@ Promotions_Yandex = 'https://ru.investing.com/equities/yandex'
 Promotions_Google = 'https://ru.investing.com/equities/google-inc'
 Promotions_Facebook = 'https://ru.investing.com/equities/facebook-inc'
 Promotions_GM = 'https://ru.investing.com/equities/gen-motors'
+Promotions_EA = 'https://ru.investing.com/equities/electronic-arts-inc'
+Promotions_Huawei = 'https://www.investing.com/equities/huawei-culture'
 
 Valute_Bitcoin = 'https://ru.investing.com/crypto/bitcoin/btc-usd'
 Valute_Dollar_reserve = 'https://bcs-express.ru/kotirovki-i-grafiki/usd000utstom'
@@ -229,7 +231,7 @@ def check_IT():
     convert_amd = soup.findAll("span", {"class": "arial_26 inlineblock pid-8274-last"})
     convert_min_amd = soup.findAll("span", {"class": "inlineblock pid-8274-low"})
     convert_max_amd = soup.findAll("span", {"class": "inlineblock pid-8274-high"})
-    print(progress_bar + '1/9')
+    print(progress_bar + '1/10')
     time.sleep(2)
 
     full_page = requests.get(Promotions_Intel, headers=headers)
@@ -237,7 +239,7 @@ def check_IT():
     convert_intel = soup.findAll("span", {"class": "arial_26 inlineblock pid-251-last"})
     convert_min_intel = soup.findAll("span", {"class": "inlineblock pid-251-low"})
     convert_max_intel = soup.findAll("span", {"class": "inlineblock pid-251-high"})
-    print(progress_bar + '2/9')
+    print(progress_bar + '2/10')
     time.sleep(2)
 
     full_page = requests.get(Promotions_Apple, headers=headers)
@@ -245,7 +247,7 @@ def check_IT():
     convert_apple = soup.findAll("span", {"class": "arial_26 inlineblock pid-6408-last"})
     convert_min_apple = soup.findAll("span", {"class": "inlineblock pid-6408-low"})
     convert_max_apple = soup.findAll("span", {"class": "inlineblock pid-6408-high"})
-    print(progress_bar + '3/9')
+    print(progress_bar + '3/10')
     time.sleep(2)
 
     full_page = requests.get(Promotions_IBM, headers=headers)
@@ -253,7 +255,7 @@ def check_IT():
     convert_ibm = soup.findAll("span", {"class": "arial_26 inlineblock pid-8082-last"})
     convert_min_ibm = soup.findAll("span", {"class": "inlineblock pid-8082-low"})
     convert_max_ibm = soup.findAll("span", {"class": "inlineblock pid-8082-high"})
-    print(progress_bar + '4/9')
+    print(progress_bar + '4/10')
     time.sleep(2)
 
     full_page = requests.get(Promotions_Microsoft, headers=headers)
@@ -261,7 +263,7 @@ def check_IT():
     convert_microsoft = soup.findAll("span", {"class": "arial_26 inlineblock pid-252-last"})
     convert_min_microsoft = soup.findAll("span", {"class": "inlineblock pid-252-low"})
     convert_max_microsoft = soup.findAll("span", {"class": "inlineblock pid-252-high"})
-    print(progress_bar + '5/9')
+    print(progress_bar + '5/10')
     time.sleep(2)
 
     full_page = requests.get(Promotions_Google, headers=headers)
@@ -269,7 +271,7 @@ def check_IT():
     convert_google = soup.findAll("span", {"class": "arial_26 inlineblock pid-6369-last"})
     convert_min_google = soup.findAll("span", {"class": "inlineblock pid-6369-low"})
     convert_max_google = soup.findAll("span", {"class": "inlineblock pid-6369-high"})
-    print(progress_bar + '6/9')
+    print(progress_bar + '6/10')
     time.sleep(2)
 
     full_page = requests.get(Promotions_Facebook, headers=headers)
@@ -277,7 +279,7 @@ def check_IT():
     convert_facebook = soup.findAll("span", {"class": "arial_26 inlineblock pid-26490-last"})
     convert_min_facebook = soup.findAll("span", {"class": "inlineblock pid-26490-low"})
     convert_max_facebook = soup.findAll("span", {"class": "inlineblock pid-26490-high"})
-    print(progress_bar + '7/9')
+    print(progress_bar + '7/10')
     time.sleep(2)
 
     full_page = requests.get(Promotions_Yandex, headers=headers)
@@ -285,7 +287,7 @@ def check_IT():
     convert_yandex = soup.findAll("span", {"class": "arial_26 inlineblock pid-13999-last"})
     convert_min_yandex = soup.findAll("span", {"class": "inlineblock pid-13999-low"})
     convert_max_yandex = soup.findAll("span", {"class": "inlineblock pid-13999-high"})
-    print(progress_bar + '8/9')
+    print(progress_bar + '8/10')
     time.sleep(2)
 
     full_page = requests.get(Promotions_Huawei, headers=headers)
@@ -293,7 +295,15 @@ def check_IT():
     convert_huawei = soup.findAll("span", {"class": "arial_26 inlineblock pid-944369-last"})
     convert_min_huawei = soup.findAll("span", {"class": "inlineblock pid-944369-low"})
     convert_max_huawei = soup.findAll("span", {"class": "inlineblock pid-944369-high"})
-    print(progress_bar + '9/9')
+    print(progress_bar + '9/10')
+    time.sleep(2)
+
+    full_page = requests.get(Promotions_EA, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    convert_ea = soup.findAll("span", {"class": "arial_26 inlineblock pid-6472-last"})
+    convert_min_ea = soup.findAll("span", {"class": "inlineblock pid-6472-low"})
+    convert_max_ea = soup.findAll("span", {"class": "inlineblock pid-6472-high"})
+    print(progress_bar + '10/10')
     time.sleep(.5)
 
     time_flow = input('Текущее время (hh-mm): ')

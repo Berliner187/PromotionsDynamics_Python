@@ -21,6 +21,7 @@ Promotions_GM = 'https://ru.investing.com/equities/gen-motors'
 Promotions_Ford = 'https://ru.investing.com/equities/ford-motor-co'
 Promotions_Daimler = 'https://ru.investing.com/equities/daimler'
 Promotions_EA = 'https://ru.investing.com/equities/electronic-arts-inc'
+Promotions_Huawei = 'https://www.investing.com/equities/huawei-culture'
 
 
 Valute_Bitcoin = 'https://www.investing.com/crypto/bitcoin'
@@ -259,6 +260,17 @@ def check_IT():
     convert_min = soup.findAll("span", {"class": "inlineblock pid-944369-low"})
     convert_max = soup.findAll("span", {"class": "inlineblock pid-944369-high"})
     print(promotions_now + " Huwei: " + convert[0].text + " $")
+    print(day_min + convert_min[0].text + " $")
+    print(day_max + convert_max[0].text + " $")
+
+
+    print('**************** Electronic Arts ****************')
+    full_page = requests.get(Promotions_EA, headers=headers)
+    soup = BeautifulSoup(full_page.content, 'html.parser')
+    convert_ea = soup.findAll("span", {"class": "arial_26 inlineblock pid-6472-last"})
+    convert_min_ea = soup.findAll("span", {"class": "inlineblock pid-6472-low"})
+    convert_max_ea = soup.findAll("span", {"class": "inlineblock pid-6472-high"})
+    print(promotions_now + " EA: " + convert[0].text + " $")
     print(day_min + convert_min[0].text + " $")
     print(day_max + convert_max[0].text + " $")
 
