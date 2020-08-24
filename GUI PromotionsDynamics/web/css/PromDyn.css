@@ -13,6 +13,9 @@ body {
 	background-color: #dae4e5;
  	background-size: 1920px 1080px
 }
+h1, h2, p {
+	text-shadow: .2em .2em .3em black
+}
 h1 {
 	font-family: 'SFNS Display';
 	font-size: 5em;
@@ -27,7 +30,6 @@ h2 {
 p {
 	font-size: 1.5em;
 	color: #fff;
-	text-shadow: .2em .2em .4em black
 }
 .p-font-1 {
 	font-size: 2em
