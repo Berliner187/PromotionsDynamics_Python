@@ -10,7 +10,7 @@
 	font-family: 'Arial'
 }
 body {
-	background-color: #dae4e5;
+	background-color: #D9B8C4;
  	background-size: 1920px 1080px
 }
 h1, h2, p {
@@ -35,7 +35,8 @@ p {
 	font-size: 2em
 }
 
-input[type="text"]::placeholder { color: #000; opacity: .6} 
+input[type="text"]::placeholder { color: #fff; opacity: .8} 
+input[type="number"]::placeholder { color: #fff; opacity: .8}
 
 hr {
   left: 0;
@@ -63,7 +64,7 @@ hr {
     padding: 5px;
     border-radius: 2em;
     box-shadow: 1em 1em 1em .7em;
-    background-color: #dab6c8;
+    background-color: #957186;
 }
 .block-left {
 	width: 30%;
@@ -84,7 +85,6 @@ hr {
 	box-shadow: .1em .1em .3em .3em rgba(0,0,0,.6);
 	border-radius: 10px;
 	padding: 10px;
-	color: #000;
 	outline: none;
 	font-size: 120%;
 	transition-duration: .5s
@@ -130,20 +130,17 @@ hr {
 	cursor: pointer;
 }
 .btn-out {
-	background-color: #691d35;
+	background-color: #8b0333;
 }
 .buttons:hover {
 	transition-duration: .3s;
 	background-position: right; 
 	box-shadow: .1em .1em .4em .4em rgba(0,0,0,.9);
-	background-color: #fde6b6;
-	color: #000;
+	background-color: #c01653;
 	opacity: .9
 }
 .buttons:focus {
 	box-shadow: .1em .1em .6em .6em rgba(0,0,0,.9);
-	background-color: #fde6b6;
-	color: #000
 }
 
 .btn-confilm {
