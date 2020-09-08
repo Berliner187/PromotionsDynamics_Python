@@ -1,0 +1,82 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.clock {
+	display: inline-flex;
+	width: 25em;
+	height: 25em;
+	position: absolute;
+	margin-top: 23em;
+	left: 2%;
+	align-items: center;
+	justify-content: center;
+	background: url(../img/rolex-for-js.png);
+	background-size: 100%;
+	border-radius: 20%;
+	background-color: #957186
+}
+.clock:before {
+	content: '';
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	background: #fff;
+	border-radius: 50%;
+	z-index: 10000;
+}
+.clock .hour,
+.clock .min, 
+.clock .sec
+{
+	position: absolute;
+}
+
+.clock .hour, .hr {
+	width: 190px;
+	height: 175px;
+}
+.clock .min, .mn {
+	width: 200px;
+	height: 280px;
+}
+.clock .sec, .sc {
+	width: 200px;
+	height: 380px;
+}
+.hr, .mn, .sc
+{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	border-radius: 50%;
+	position: absolute;
+}
+.hr:before 
+{
+	content: '';
+	width: 8px;
+	height: 80px;
+	background: #fff;
+	z-index: 10;
+	border-radius: 6px 6px 0 0;
+}
+.mn:before 
+{
+	content: '';
+	width: 4px;
+	height: 10em;
+	background: #fff;
+	z-index: 11;
+	border-radius: 6px 6px 0 0;
+}
+.sc:before 
+{
+	content: '';
+	width: 2px;
+	height: 15em;
+	background: #c01653;
+	z-index: 10;
+	border-radius: 6px 6px 0 0;
+}

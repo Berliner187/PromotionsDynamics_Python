@@ -110,7 +110,7 @@ document.getElementById("get_Huawei").onclick = async function display_Huawei() 
 
 };
 
-document.getElementById("get_Tesla").onclick = async function display_Huawei() {
+document.getElementById("get_Tesla").onclick = async function display_Tesla() {
 
     document.getElementById("prom_info").innerHTML = textLoad;
 
@@ -119,7 +119,7 @@ document.getElementById("get_Tesla").onclick = async function display_Huawei() {
 
 };
 
-document.getElementById("get_Nissan").onclick = async function display_Huawei() {
+document.getElementById("get_Nissan").onclick = async function display_Ford() {
 
     document.getElementById("prom_info").innerHTML = textLoad;
 
@@ -128,11 +128,34 @@ document.getElementById("get_Nissan").onclick = async function display_Huawei() 
 
 };
 
-document.getElementById("get_Ford").onclick = async function display_Huawei() {
+document.getElementById("get_Ford").onclick = async function display_Ford() {
 
     document.getElementById("prom_info").innerHTML = textLoad;
 
     let output = await eel.check_Ford()();
     document.getElementById("prom_info").innerHTML = output;
+
+};
+
+
+// Pandas
+document.getElementById("getPandas_IT").onclick = async function display_IT() {
+
+    document.getElementById("pandas-out").innerHTML = textLoad + ' Please, wait' ;
+
+    await eel.start_Pandas_IT()();
+
+    document.getElementById("pandas-out").innerHTML = 'Has done!';
+
+
+
+};
+
+document.getElementById("getPandas_Auto").onclick = async function display_Auto() {
+
+    document.getElementById("pandas-out").innerHTML = textLoad + ' Please, wait' ;
+
+    let output = await eel.start_Pandas_Auto()();
+    document.getElementById("pandas-out").innerHTML = 'Has done!';
 
 };

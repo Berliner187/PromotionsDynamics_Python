@@ -11,7 +11,6 @@
 }
 body {
 	background-color: #D9B8C4;
- 	background-size: 1920px 1080px
 }
 h1, h2, p {
 	text-shadow: .2em .2em .3em black
@@ -28,11 +27,12 @@ h2 {
 	font-size: 1.5em
 }
 p {
-	font-size: 1.5em;
+	font-size: 120%;
 	color: #fff;
+	margin: .2em
 }
 .p-font-1 {
-	font-size: 2em
+	font-size: 170%
 }
 
 input[type="text"]::placeholder { color: #fff; opacity: .8} 
@@ -54,27 +54,66 @@ hr {
 }
 .block-header {
 	margin: 0 auto;
-	width: 50%;
-	height: 6em;
-	margin-bottom: 4em;
+	margin-top: 1%;
+	width: 96%;
+	height: 6%;
+	margin-bottom: 3em;
 }
 
 .brd {
-	border: .1vw double black; 
     padding: 5px;
     border-radius: 2em;
-    box-shadow: 1em 1em 1em .7em;
+    box-shadow: .5em 1.5em 1.4em .8em rgba(000, 000, 000, .75);
     background-color: #957186;
 }
-.block-left {
+.block-calcucate {
 	width: 30%;
 	float: left;
-	margin-left: 2em;
+	margin-left: 2%;
+	bottom: 0;
+	margin-bottom: 0
 }
-.block-right {
+.block-promotions {
 	width: 60%;
 	float: right;
 	margin-right: 2em;
+}
+.block-pandas {
+	text-align: center;
+	width: 25%;
+	float: right;
+	margin-right: 2em;
+	margin-top: 6em
+}
+.buttons-pandas {
+	width: 40%;
+	display: inline;
+	border: none;
+	border-radius: 10px;
+	padding: .4em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+	margin-left: .4em;
+	margin-right: .4em;
+	color: #FFF;
+  	background-size: 300% auto;
+  	box-shadow: .1em .1em .3em .3em rgba(0,0,0,.6);
+	outline: none;
+	font-size: 140%;
+	font-weight: 300;
+	transition-duration: .3s;
+	opacity: .7;
+	cursor: pointer;
+}
+.buttons-pandas:hover {
+	transition-duration: .3s;
+	background-position: right; 
+	box-shadow: -3.1em -3.1em -3.4em -3.4em rgba(0,0,0,.9);
+	background-color: #c01653;
+	opacity: .9
+}
+.buttons-pandas:focus {
+	box-shadow: .1em .1em .6em .6em rgba(0,0,0,.9);
 }
 
 .entry-field {
@@ -135,7 +174,7 @@ hr {
 .buttons:hover {
 	transition-duration: .3s;
 	background-position: right; 
-	box-shadow: .1em .1em .4em .4em rgba(0,0,0,.9);
+	box-shadow: -3.1em -3.1em -3.4em -3.4em rgba(0,0,0,.9);
 	background-color: #c01653;
 	opacity: .9
 }
@@ -175,7 +214,12 @@ hr {
 	margin-top: 0;
 	margin-bottom: 0;
 }
-
+.span-out-pandas {
+	display: block;
+	color: #fff;
+	font-size: 1.2em;
+	margin-top: 3em
+}
 
 
 
@@ -219,8 +263,8 @@ hr {
 }
 
 #container {
-	margin-top: 30em;
-	margin-left: 10em;
+	margin-top: 6em;
+	float: right;
 	border-radius: 1em;
 	box-shadow: .4em .4em .7em .7em;
 }

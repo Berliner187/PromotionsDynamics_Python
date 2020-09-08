@@ -6,6 +6,7 @@
 	<link rel="icon" type="img/svg" href="favicon.svg">
 	<script type="text/javascript" src="/eel.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/PromDyn.css">
+	<link rel="stylesheet" type="text/css" href="css/clock.css">
 </head>
 <body>
 	
@@ -13,7 +14,7 @@
 		<h1>Promotions Dynamics</h1>
 	</div>
 
-	<div class="block-left brd" align="center">
+	<div class="block-calcucate brd" align="center">
 		
 		<div class="inline-info">
         	<p>Current value of shares: <span class="span-out" id="prom_info"> --- </span> $</p>
@@ -21,7 +22,6 @@
 
         	<p class="p-font-1">Calculate dividends</p>
         	<div class="confilm-entry" align="center">
-        		<input id="a_0" class="entry-field ef-small" type="text" placeholder="The cost">
         		<input id="a_1" class="entry-field ef-small" type="text" name="" placeholder="Shares in the estate">
         		<input id="a_2" class="entry-field ef-small" type="text" placeholder="Percent">
         	</div>
@@ -41,7 +41,7 @@
 
     </div>
 
-    <div class="block-right brd" align="center">
+    <div class="block-promotions brd" align="center">
 		
 	<p>IT-corporations</p>
         <button id="get_AMD" class="buttons btn-out">AMD</button>
@@ -61,6 +61,14 @@
         <button id="get_Ford" class="buttons btn-out">Ford</button>
 
     </div>
+
+    <div class="block-pandas brd">
+    	<p>Собрать в файл данные</p>
+    	<button class="buttons-pandas btn-out" id="getPandas_IT">IT-corporations</button>
+    	<button class="buttons-pandas btn-out" id="getPandas_Auto">Carmakers</button>
+    	<span class="span-out-pandas" id="pandas-out"> --- </span>
+    </div>
+
 
 	<script type="text/javascript" src="js/PromDyn.js"></script>
 
@@ -90,9 +98,11 @@
 		let ap_11 = 440.25
 		let ap_12 = 438.66
 		let ap_13 = 435.75
-		let ap_14 = 425.04
+		let ap_14 = 435
 
-		Highcharts.chart('container', {
+		Highcharts.chart(
+			'container', 
+			{
 		  chart: {
 		    type: 'line'
 		  },
@@ -128,6 +138,39 @@
 		  }]
 		});
 	</script>
+
+	    	<div class="clock brd">
+    		<div class="hour">
+    			<div class="hr" id="hr"></div>
+    		</div>
+    		<div class="min">
+    			<div class="mn" id="mn"></div>
+    		</div>
+    		<div class="sec">
+    			<div class="sc" id="sc"></div>
+    		</div>
+    		</div>
+    	</div>
+    	<script type="text/javascript">
+    		const deg = 6;
+    		const hr = document.querySelector('#hr')
+    		const mn = document.querySelector('#mn')
+    		const sc = document.querySelector('#sc')
+
+    		setInterval(() => {
+
+	    		let day = new Date();
+	    		let hh = day.getHours() * 30;
+	    		let mm = day.getMinutes() * deg;
+	    		let ss = day.getSeconds() * deg;
+
+	    		hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)`;
+	    		mn.style.transform = `rotateZ(${mm}deg)`;
+	    		sc.style.transform = `rotateZ(${ss}deg)`;
+
+    		})
+
+    	</script>
 
 </body>
 </html>
