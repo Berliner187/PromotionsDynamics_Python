@@ -1,4 +1,4 @@
-# GUI version 1.0
+# GUI version 1.2
 Stock dynamics with a graphical interface.
 ![PromDyn](https://github.com/Berliner187/PromotionsDynamics_Python/blob/master/FaceApp.png)
 # Promotions Dynamics
