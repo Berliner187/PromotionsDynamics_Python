@@ -1,5 +1,5 @@
 # GUI version 1.2
-Stock dynamics with a graphical interface.
+Stock dynamics with a graphical interface. You can find out the current value of a share of a particular company, calculate dividends, earnings per share, as well as collect data and save it to a Excel-file.
 ![PromDyn](https://github.com/Berliner187/PromotionsDynamics_Python/blob/master/FaceApp.png)
 # Promotions Dynamics
 Displays stock prices in real time
