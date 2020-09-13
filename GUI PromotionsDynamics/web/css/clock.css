@@ -12,10 +12,10 @@
 	left: 2%;
 	align-items: center;
 	justify-content: center;
-	background: url(../img/rolex-for-js.png);
+	background: url(../img/clock.png);
 	background-size: 100%;
 	border-radius: 20%;
-	background-color: #957186
+	background-color: #fcfcfc;
 }
 .clock:before {
 	content: '';
@@ -79,4 +79,7 @@
 	background: #c01653;
 	z-index: 10;
 	border-radius: 6px 6px 0 0;
+}
+.shadow-clock:before {
+	box-shadow: .1em .1em 3.6em .4em rgba(000, 000, 000, .65);
 }

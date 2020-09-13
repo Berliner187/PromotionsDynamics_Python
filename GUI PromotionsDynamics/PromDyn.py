@@ -393,7 +393,4 @@ def start_Pandas_IT():
     print('\n''Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
 
 
-
-
-
 eel.start("PromDyn.html", size=(1400, 800))

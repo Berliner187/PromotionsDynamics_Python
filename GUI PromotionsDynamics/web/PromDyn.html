@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Promotions Dynamics</title>
-	<link rel="icon" type="img/svg" href="favicon.svg">
+	<link rel="icon" type="img/png" href="app.png">
 	<script type="text/javascript" src="/eel.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/PromDyn.css">
 	<link rel="stylesheet" type="text/css" href="css/clock.css">
@@ -41,32 +41,33 @@
 
     </div>
 
+
     <div class="block-promotions brd" align="center">
 		
-	<p>IT-corporations</p>
-        <button id="get_AMD" class="buttons btn-out">AMD</button>
-        <button id="get_Intel" class="buttons btn-out">Intel</button>
-        <button id="get_Apple" class="buttons btn-out">Apple</button>
-        <button id="get_Facebook" class="buttons btn-out">Facebook</button>
-        <button id="get_Google" class="buttons btn-out">Google</button>
-        <button id="get_IBM" class="buttons btn-out">IBM</button>
-        <button id="get_Microsoft" class="buttons btn-out">Microsoft</button>
-        <button id="get_EA" class="buttons btn-out">Electronic Arts</button>
-        <button id="get_Yandex" class="buttons btn-out">Yandex</button>
-        <button id="get_Huawei" class="buttons btn-out">Huawei</button>
+		<p>IT-corporations</p>
+	        <button id="get_AMD" class="buttons btn-out">AMD</button>
+	        <button id="get_Intel" class="buttons btn-out">Intel</button>
+	        <button id="get_Apple" class="buttons btn-out">Apple</button>
+	        <button id="get_Facebook" class="buttons btn-out">Facebook</button>
+	        <button id="get_Google" class="buttons btn-out">Google</button>
+	        <button id="get_IBM" class="buttons btn-out">IBM</button>
+	        <button id="get_Microsoft" class="buttons btn-out">Microsoft</button>
+	        <button id="get_EA" class="buttons btn-out">Electronic Arts</button>
+	        <button id="get_Yandex" class="buttons btn-out">Yandex</button>
+	        <button id="get_Huawei" class="buttons btn-out">Huawei</button>
 
-    <p>Car manufacturers</p>
-    	<button id="get_Tesla" class="buttons btn-out">Tesla</button>
-        <button id="get_Nissan" class="buttons btn-out">Nissan</button>
-        <button id="get_Ford" class="buttons btn-out">Ford</button>
+	    <p>Car manufacturers</p>
+	    	<button id="get_Tesla" class="buttons btn-out">Tesla</button>
+	        <button id="get_Nissan" class="buttons btn-out">Nissan</button>
+	        <button id="get_Ford" class="buttons btn-out">Ford</button>
 
     </div>
 
     <div class="block-pandas brd">
-    	<p>Собрать в файл данные</p>
+    	<p>Collect in Excel-file</p>
     	<button class="buttons-pandas btn-out" id="getPandas_IT">IT-corporations</button>
     	<button class="buttons-pandas btn-out" id="getPandas_Auto">Carmakers</button>
-    	<span class="span-out-pandas" id="pandas-out"> --- </span>
+    	<p>Status: <span class="span-out" id="pandas-out"> --- </span></p>
     </div>
 
 
@@ -81,7 +82,7 @@
 
 
 	<figure class="highcharts-figure">
-	  <div id="container"></div>
+	  <div id="container" class="brd"></div>
 	</figure>
 
 	<script type="text/javascript">
@@ -139,15 +140,15 @@
 		});
 	</script>
 
-	    	<div class="clock brd">
+	    <div class="clock brd">
     		<div class="hour">
-    			<div class="hr" id="hr"></div>
+    			<div class="hr shadow-clock" id="hr"></div>
     		</div>
     		<div class="min">
-    			<div class="mn" id="mn"></div>
+    			<div class="mn shadow-clock" id="mn"></div>
     		</div>
     		<div class="sec">
-    			<div class="sc" id="sc"></div>
+    			<div class="sc shadow-clock" id="sc"></div>
     		</div>
     		</div>
     	</div>
