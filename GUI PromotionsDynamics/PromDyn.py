@@ -8,10 +8,13 @@ import time
 from datetime import date
 
 
+# Инициализация приложения при помощи библиотеки eel
 eel.init("web")
 
+# User-Agent, чтобы сайт не заблокировал доступ, думая, что это робот
 headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'}
 
+# Страницы, с которых будет браться информация
 Promotions_Tesla = 'https://ru.investing.com/equities/tesla-motors'
 Promotions_Nissan = 'https://ru.investing.com/equities/nissan-motor-co.,-ltd.'
 Promotions_AMD = 'https://www.investing.com/equities/adv-micro-device'
@@ -27,22 +30,27 @@ Promotions_Ford = 'https://ru.investing.com/equities/ford-motor-co'
 Promotions_Daimler = 'https://ru.investing.com/equities/daimler'
 Promotions_EA = 'https://ru.investing.com/equities/electronic-arts-inc'
 Promotions_Huawei = 'https://www.investing.com/equities/huawei-culture'
+# Параметры сбора данных, запись их в переменные
+parcer = 'html.parser'
+type = "span"       # По какому элементу искать
+klasse = "class"    # По какому классу искать
 
 
-@eel.expose
+# Раздел с IT-компаниями
+@eel.expose     # При нажатии кнопки в приложении, JavaScript вызывает функцию тут, в Python
 def check_AMD():
-    full_page = requests.get(Promotions_AMD, headers=headers)
-    soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-8274-last"})
-    output = convert[0].text
-    print(output)
-    return output
+    full_page = requests.get(Promotions_AMD, headers=headers)   # При помощи библиотеки requests делается запрос на сайт
+    soup = BeautifulSoup(full_page.content, parcer)      # При помощи библиотеки BeautifulSoup парсится страница
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-8274-last"})    # Поиск значения по указанным критериям
+    output = convert[0].text    # Это значение конвертируется
+    return output   # Идет возвращение полученного значения
 
+# И так по аналогии
 @eel.expose
 def check_Intel():
     full_page = requests.get(Promotions_Intel, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-251-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-251-last"})
     output = convert[0].text
     return output
 
@@ -50,7 +58,7 @@ def check_Intel():
 def check_Apple():
     full_page = requests.get(Promotions_Apple, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-6408-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-6408-last"})
     output = convert[0].text
     print(output)
     return output
@@ -59,7 +67,7 @@ def check_Apple():
 def check_IBM():
     full_page = requests.get(Promotions_IBM, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-8082-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-8082-last"})
     output = convert[0].text
     return output
 
@@ -67,7 +75,7 @@ def check_IBM():
 def check_Microsoft():
     full_page = requests.get(Promotions_Microsoft, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-252-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-252-last"})
     output = convert[0].text
     return output
 
@@ -75,7 +83,7 @@ def check_Microsoft():
 def check_Google():
     full_page = requests.get(Promotions_Google, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-6369-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-6369-last"})
     output = convert[0].text.replace(".", "").replace(",", ".")
     return output
 
@@ -83,7 +91,7 @@ def check_Google():
 def check_Facebook():
     full_page = requests.get(Promotions_Facebook, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-26490-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-26490-last"})
     output = convert[0].text
     return output
 
@@ -91,7 +99,7 @@ def check_Facebook():
 def check_EA():
     full_page = requests.get(Promotions_EA, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-6472-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-6472-last"})
     output = convert[0].text
     return output
 
@@ -99,7 +107,7 @@ def check_EA():
 def check_Yandex():
     full_page = requests.get(Promotions_Yandex, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-13999-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-13999-last"})
     output = convert[0].text
     return output
 
@@ -107,11 +115,11 @@ def check_Yandex():
 def check_Huawei():
     full_page = requests.get(Promotions_Huawei, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-944369-last"})
+    convert = soup.findAll(type, {klasse: "arial_26 inlineblock pid-944369-last"})
     output = convert[0].text
     return output
 
-
+# Тестирование получение исторических значений акций
 @eel.expose
 def check_gap_Apple():
     History_Apple = 'https://ru.investing.com/equities/apple-computer-inc-historical-data'
@@ -122,6 +130,7 @@ def check_gap_Apple():
         price = convert_price[total].text
         print(price)
 
+# Раздел с автопроизводителями
 @eel.expose
 def check_Tesla():
     full_page = requests.get(Promotions_Tesla, headers=headers)
@@ -134,24 +143,24 @@ def check_Tesla():
 def check_Nissan():
     full_page = requests.get(Promotions_Nissan, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert_usd = soup.findAll("span", {"class": "arial_26 inlineblock pid-44127-last"})
-    output = convert_usd[0].text
+    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-44127-last"})
+    output = convert[0].text
     return output
 
 @eel.expose
 def check_Ford():
     full_page = requests.get(Promotions_Ford, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert_usd = soup.findAll("span", {"class": "arial_26 inlineblock pid-255-last"})
-    output = convert_usd[0].text
+    convert = soup.findAll("span", {"class": "arial_26 inlineblock pid-255-last"})
+    output = convert[0].text
     return output
 
 
-# Упаковка в Excel-файл через Pandas
-
+# Упаковка в Excel-файл через библиотеку Pandas
+# Функция с автопроизводителями
 @eel.expose
 def start_Pandas_Auto():
-
+    # Текст, который используется в процессе работы
     progress_bar = 'Progress: '
     packing = 'Packing into file...'
     sheet_name = 'Данные рынка на '
@@ -159,7 +168,7 @@ def start_Pandas_Auto():
     prom_day_max = 'Дневной максимум '
     prom_day_min = 'Дневной минимум '
 
-    print(progress_bar + '1/5')
+    print(progress_bar + '1/5')     # Счетчик прогесса
     full_page = requests.get(Promotions_Tesla, headers=headers)
     soup = BeautifulSoup(full_page.content, 'html.parser')
     convert_tesla = soup.findAll("span", {"class": "arial_26 inlineblock pid-13994-last"})
@@ -199,16 +208,16 @@ def start_Pandas_Auto():
     convert_max_daimler = soup.findAll("span", {"class": "inlineblock pid-355-high"})
     time.sleep(1)
 
-    hms = datetime.datetime.today()
+    hms = datetime.datetime.today()     # Дата и время
     print(hms.hour, hms.minute, hms.second)
-    time_flow = hms.hour, hms.minute, hms.second
+    time_flow = hms.hour, hms.minute, hms.second    # Форматирование в формат времени
     print(packing)
-
+    # Шаблон данных
     data = [
-        [prom_now + str("Tesla"), convert_tesla[0].text],
-        [prom_day_min, convert_min_tesla[0].text],
-        [prom_day_max, convert_max_tesla[0].text],
-        [" ", " "],
+        [prom_now + str("Tesla"), convert_tesla[0].text],   # Текущая стоимость акций + актуальное значение
+        [prom_day_min, convert_min_tesla[0].text],          # Дневной минимум
+        [prom_day_max, convert_max_tesla[0].text],          # Дневной максимум
+        [" ", " "],                                         # Отступ
         [prom_now + str("Nissan"), convert_nissan[0].text],
         [prom_day_min, convert_min_nissan[0].text],
         [prom_day_max, convert_max_nissan[0].text],
@@ -226,33 +235,36 @@ def start_Pandas_Auto():
         [prom_day_max, convert_max_daimler[0].text],
     ]
 
-    today = date.today()
-    direction = 'Сarmakers_'
-    time_now = datetime.datetime.time(datetime.datetime.now())
-    new_data = pd.DataFrame(data).rename_axis(None, axis=1)
-    file_name = str(direction) + str(today) + '-' + str(time_flow)
-    file_directory = file_name + '.xlsx'
-    new_data.style.hide_index()
+    today = date.today()    # Текущая дата
+    direction = 'Сarmakers_'    # Название файла
+    time_now = datetime.datetime.time(datetime.datetime.now())  # Текущее время
+    new_data = pd.DataFrame(data).rename_axis(None, axis=1)     # Создание датафрейма
+    file_name = str(direction) + str(today) + '-' + str(time_flow)  # Имя файла
+    file_directory = file_name + '.xlsx'    # Добавление Excel-расширения к файлу
+    new_data.style.hide_index()     # Индексы не будут показываться
+    # Дальнейшая кастомизация через xlsxwriter
     writer = pd.ExcelWriter(file_directory, engine='xlsxwriter')
     new_data.to_excel(writer, sheet_name=str(sheet_name) + str(today), index=False)
 
     workbook = writer.book
     worksheet = writer.sheets[str(sheet_name) + str(today)]
-
-    format_list = workbook.add_format({'border': 0, 'num_format': 'hh:mm:ss', 'size': 14, 'align': 'center'})
-    date_format = workbook.add_format({'num_format': 'mm.dd.yyyy'})
-    worksheet.write('A1', time_now, format_list)
-    worksheet.write('B1', today, date_format)
+    # Параметры данных в файле
+    format_list = workbook.add_format({'border': 0, 'num_format': 'hh:mm:ss', 'size': 14, 'align': 'center'})   # Параметры формата чисел, размер шрифта, позиционирование по центру
+    date_format = workbook.add_format({'num_format': 'mm.dd.yyyy'})     # Формат даты
+    worksheet.write('A1', time_now, format_list)    # Добавление в столбец А1 текущего времени
+    worksheet.write('B1', today, date_format)       # Добавление в столбец B1 текущей даты
     format = workbook.add_format({'align': 'left'})
 
-    worksheet.set_landscape()
+    worksheet.set_landscape()   # Ориентация по умолчанию
+    # Параметры стобцов
     worksheet.set_column('A:A', 40, format)
     worksheet.set_column('B:B', 20, format)
 
-    writer.save()
-    print('\n''Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
+    writer.save()   # Сохранение получившегося файла
+    print('\n''Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')   # Сообщение о сохранении
 
 
+# Функция с IT-компаниями
 @eel.expose
 def start_Pandas_IT():
 
@@ -263,11 +275,7 @@ def start_Pandas_IT():
     prom_day_max = 'Дневной максимум '
     prom_day_min = 'Дневной минимум '
 
-    full_page = requests.get(Promotions_AMD, headers=headers)
-    soup = BeautifulSoup(full_page.content, 'html.parser')
-    convert_amd = soup.findAll("span", {"class": "arial_26 inlineblock pid-8274-last"})
-    convert_min_amd = soup.findAll("span", {"class": "inlineblock pid-8274-low"})
-    convert_max_amd = soup.findAll("span", {"class": "inlineblock pid-8274-high"})
+    check_AMD(convert_amd)
     print(progress_bar + '1/8')
     time.sleep(1)
 
@@ -393,4 +401,4 @@ def start_Pandas_IT():
     print('\n''Файл с названием ' + str(direction) + str(today) + '-' + str(time_flow) + ' сохранен')
 
 
-eel.start("PromDyn.html", size=(1920, 1080))
+eel.start("PromDyn.html", size=(1920, 1080))    # Параметры отображения содержимого в приложении
